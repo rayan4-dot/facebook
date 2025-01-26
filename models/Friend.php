@@ -13,7 +13,7 @@ class Friend extends Model {
 
     // Get friend requests
     public function getRequests($userId) {
-        $stmt = $this->dbx@->prepare("SELECT * FROM friends WHERE friend_id = ? AND status = 'pending'");
+        $stmt = $this->db->prepare("SELECT * FROM friends WHERE friend_id = ? AND status = 'pending'");
         $stmt->execute([$userId]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }

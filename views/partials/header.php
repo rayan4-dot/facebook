@@ -15,7 +15,7 @@
                 <a href="/dashboard">Dashboard</a>
                 <a href="/profile/<?= Session::get('user_id') ?>">Profile</a>
                 <a href="/friends">Friends</a>
-                <a href="/logout">Logout</a>
+                <a  href="/logout">Logout</a>
             <?php else: ?>
                 <a href="/login">Login</a>
                 <a href="/register">Register</a>

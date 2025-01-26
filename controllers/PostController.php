@@ -31,5 +31,15 @@ class PostController {
         }
         return null;
     }
+    public function index() {
+        $auth = new Auth();
+        if (!$auth->isLoggedIn()) {
+            header("Location: /login");
+            exit;
+        }
+
+        $posts = (new Post())->getAllPosts();
+        include '../views/dashboard.php';
+    }
 }
 ?>

@@ -7,23 +7,46 @@
 </head>
 <body>
     
-<div class="friend-requests">
-    <h3>Pending Requests</h3>
-    <?php foreach ($requests as $request): ?>
-        <div class="request">
-            <span><?= $request['name'] ?></span>
-            <button class="accept-request" data-request-id="<?= $request['id'] ?>">Accept</button>
+<?php include 'partials/header.php'; ?>
+
+<div class="container">
+    <!-- Pending Requests -->
+    <div class="requests-section">
+        <h2>Friend Requests</h2>
+        <?php if (!empty($requests)): ?>
+            <?php foreach ($requests as $request): ?>
+            <div class="request-item">
+                <img src="<?= $request['profile_picture'] ?>" class="profile-pic-small">
+                <div class="request-info">
+                    <h4><?= htmlspecialchars($request['name']) ?></h4>
+                    <form method="POST" action="/friends/accept">
+                        <input type="hidden" name="request_id" value="<?= $request['id'] ?>">
+                        <button type="submit" class="accept-btn">Accept</button>
+                    </form>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p>No pending friend requests</p>
+        <?php endif; ?>
+    </div>
+
+    <!-- Friends List -->
+    <div class="friends-section">
+        <h2>Your Friends</h2>
+        <div class="friends-grid">
+            <?php foreach ($friends as $friend): ?>
+            <div class="friend-card">
+                <img src="<?= $friend['profile_picture'] ?>" class="profile-pic-medium">
+                <h4><?= htmlspecialchars($friend['name']) ?></h4>
+                <a href="/profile/<?= $friend['id'] ?>" class="view-profile">View Profile</a>
+            </div>
+            <?php endforeach; ?>
         </div>
-    <?php endforeach; ?>
+    </div>
 </div>
 
-<div class="friends-list">
-    <?php foreach ($friends as $friend): ?>
-        <div class="friend">
-            <a href="profile.php?id=<?= $friend['id'] ?>"><?= $friend['name'] ?></a>
-        </div>
-    <?php endforeach; ?>
-</div>
+<?php include 'partials/footer.php'; ?>
 
 <script>
 // AJAX friend request handling

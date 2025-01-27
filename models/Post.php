@@ -6,19 +6,16 @@ class Post {
     public function __construct() {
         $this->db = (new Database())->connect();
     }
-
-    // Existing methods...
-
     public function getImagePath($postId) {
         $query = "SELECT image FROM posts WHERE id = :id";
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':id', $postId, PDO::PARAM_INT);
         $stmt->execute();
-
+    
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result ? $result['image'] : null;
     }
-
+    
     public function create($userId, $content, $image = null) {
         $query = "INSERT INTO posts (user_id, content, image, created_at) VALUES (:user_id, :content, :image, NOW())";
         $stmt = $this->db->prepare($query);
@@ -27,7 +24,7 @@ class Post {
         $stmt->bindParam(':image', $image);
         return $stmt->execute();
     }
-
+    
     public function update($postId, $content, $image = null) {
         $query = "UPDATE posts SET content = :content, image = :image, updated_at = NOW() WHERE id = :id";
         $stmt = $this->db->prepare($query);
@@ -36,7 +33,7 @@ class Post {
         $stmt->bindParam(':image', $image);
         return $stmt->execute();
     }
-
+    
     public function getAllPosts() {
         $query = "SELECT posts.*, users.name, users.profile_picture 
                   FROM posts
@@ -46,7 +43,6 @@ class Post {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
-    
+        
 }
 ?>

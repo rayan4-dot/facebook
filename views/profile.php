@@ -1,3 +1,6 @@
+<?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);?>
 <?php include 'header.php'; ?>
 <div class="profile-header">
     <img src="<?= $user['profile_picture'] ?>" class="cover-photo">

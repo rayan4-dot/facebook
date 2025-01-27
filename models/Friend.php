@@ -1,7 +1,5 @@
 <?php
 
-
-
 class Friend extends Model {
 
 

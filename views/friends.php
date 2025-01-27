@@ -1,3 +1,7 @@
+<?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,7 +51,8 @@
 </div>
 
 <?php include 'partials/footer.php'; ?>
-
+</body>
+</html>
 <script>
 // AJAX friend request handling
 document.querySelectorAll('.accept-request').forEach(button => {
